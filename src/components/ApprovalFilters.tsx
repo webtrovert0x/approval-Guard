@@ -42,8 +42,8 @@ export const ApprovalFilters: React.FC<ApprovalFiltersProps> = ({
   counts,
 }) => {
   return (
-    <div className="flex flex-col gap-4 my-2">
-      <div className="flex flex-wrap items-center justify-between gap-3">
+    <div className="flex flex-col gap-2.5 my-1">
+      <div className="flex flex-wrap items-center justify-between gap-2.5">
         {/* Filter Pills */}
         <div className="flex items-center gap-2 flex-wrap">
           <button

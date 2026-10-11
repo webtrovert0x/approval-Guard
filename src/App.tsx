@@ -332,7 +332,7 @@ export function ApprovalGuardApp() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+      <main className="flex-1 max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-3.5 space-y-3">
         {/* High Severity Live Alert Banner */}
         {!bannerDismissed && topCriticalApproval && (
           <LiveAlertBanner
@@ -379,35 +379,35 @@ export function ApprovalGuardApp() {
         />
 
         {/* Informational Callout / Guard Principles */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
-          <div className="glass-panel p-4 text-xs space-y-1.5 border-slate-800">
-            <div className="font-bold text-slate-200 flex items-center gap-1.5">
-              <Lock className="w-4 h-4 text-emerald-400" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
+          <div className="glass-panel p-3 text-xs space-y-1 border-slate-800">
+            <div className="font-bold text-slate-200 flex items-center gap-1.5 text-[11px]">
+              <Lock className="w-3.5 h-3.5 text-emerald-400" />
               <span>Token Safety</span>
             </div>
-            <p className="text-slate-400 leading-relaxed text-[11px]">
+            <p className="text-slate-400 leading-relaxed text-[10px]">
               Permissions stay active until you remove them. Disconnecting apps ensures
               old apps can never access your tokens without permission.
             </p>
           </div>
 
-          <div className="glass-panel p-4 text-xs space-y-1.5 border-slate-800">
-            <div className="font-bold text-slate-200 flex items-center gap-1.5">
-              <Radio className="w-4 h-4 text-cyan-400" />
+          <div className="glass-panel p-3 text-xs space-y-1 border-slate-800">
+            <div className="font-bold text-slate-200 flex items-center gap-1.5 text-[11px]">
+              <Radio className="w-3.5 h-3.5 text-cyan-400" />
               <span>Live Alerts</span>
             </div>
-            <p className="text-slate-400 leading-relaxed text-[11px]">
+            <p className="text-slate-400 leading-relaxed text-[10px]">
               Approval Guard watches your wallet and warns you immediately whenever
               an app requests access to your tokens.
             </p>
           </div>
 
-          <div className="glass-panel p-4 text-xs space-y-1.5 border-slate-800">
-            <div className="font-bold text-slate-200 flex items-center gap-1.5">
-              <Layers className="w-4 h-4 text-amber-400" />
+          <div className="glass-panel p-3 text-xs space-y-1 border-slate-800">
+            <div className="font-bold text-slate-200 flex items-center gap-1.5 text-[11px]">
+              <Layers className="w-3.5 h-3.5 text-amber-400" />
               <span>Security Rules</span>
             </div>
-            <p className="text-slate-400 leading-relaxed text-[11px]">
+            <p className="text-slate-400 leading-relaxed text-[10px]">
               Set spending limits for your tokens and keep a trusted list of safe apps
               directly on BOT Chain.
             </p>
@@ -416,8 +416,8 @@ export function ApprovalGuardApp() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-800/80 bg-slate-950/80 py-8 text-xs text-slate-400">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <footer className="border-t border-slate-800/80 bg-slate-950/80 py-3 text-[11px] text-slate-400 mt-auto">
+        <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <span className="font-bold text-white">BOT Approval Guard</span>
             <span>•</span>

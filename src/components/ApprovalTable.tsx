@@ -49,19 +49,19 @@ export const ApprovalTable: React.FC<ApprovalTableProps> = ({
   // 1. Fee Gate: Wallet has not paid the on-chain scan fee yet
   if (!hasAuditedWallet) {
     return (
-      <div className="empty-state-card border-amber-500/30 bg-slate-900/80 my-6 p-8">
-        <div className="w-14 h-14 rounded-2xl bg-amber-500/15 border border-amber-500/40 flex items-center justify-center text-amber-400 mb-4 shadow-[0_0_20px_rgba(245,158,11,0.2)]">
-          <AlertOctagon className="w-7 h-7" />
+      <div className="empty-state-card border-amber-500/30 bg-slate-900/80 my-2 p-5">
+        <div className="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/40 flex items-center justify-center text-amber-400 mb-2 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
+          <AlertOctagon className="w-5 h-5" />
         </div>
-        <div className="flex items-center gap-2 mb-1.5 flex-wrap justify-center">
-          <h3 className="text-base font-bold text-slate-100">
+        <div className="flex items-center gap-2 mb-1 flex-wrap justify-center">
+          <h3 className="text-sm font-bold text-slate-100">
             Security Scan Required
           </h3>
           <span className="badge badge-elevated text-[10px]">
             0.0001 BOT Fee
           </span>
         </div>
-        <p className="mt-2 text-xs text-slate-400 max-w-lg mx-auto leading-relaxed">
+        <p className="mt-1 text-xs text-slate-400 max-w-lg mx-auto leading-relaxed">
           {activeAccount ? (
             <>
               Wallet <span className="mono text-slate-200">{activeAccount.slice(0, 10)}...{activeAccount.slice(-8)}</span> has not been checked yet. BOT Approval Guard requires a <strong className="text-amber-300">0.0001 BOT scan fee</strong> to check which apps have permission to spend your tokens.
@@ -71,11 +71,11 @@ export const ApprovalTable: React.FC<ApprovalTableProps> = ({
           )}
         </p>
 
-        <div className="mt-6 flex items-center justify-center gap-3">
+        <div className="mt-3.5 flex items-center justify-center gap-3">
           <button
             onClick={onRequireAuditScan}
             id="btn-gate-execute-audit"
-            className="btn btn-primary text-xs py-2.5 px-5 flex items-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.35)]"
+            className="btn btn-primary text-xs py-2 px-4 flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.35)]"
           >
             <ShieldCheck className="w-4 h-4" />
             <span>Run Security Scan (0.0001 BOT)</span>
