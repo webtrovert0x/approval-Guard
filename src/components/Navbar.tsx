@@ -16,7 +16,6 @@ import {
   RotateCcw,
   Zap,
   BookOpen,
-  Github,
 } from 'lucide-react';
 import type { SecurityAlert } from '../types';
 
@@ -213,17 +212,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               <BookOpen className="w-4 h-4" />
             </button>
           )}
-
-          {/* GitHub Repo */}
-          <a
-            href="https://github.com/webtrovert0x/approval-Guard"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="GitHub Repository"
-            className="p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition"
-          >
-            <Github className="w-4 h-4" />
-          </a>
 
           {/* Alerts Bell */}
           <div className="relative">

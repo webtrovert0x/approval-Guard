@@ -443,15 +443,6 @@ export function ApprovalGuardApp() {
               <span>Bohr Scan</span>
               <ExternalLink className="w-3 h-3" />
             </a>
-            <a
-              href="https://github.com/webtrovert0x/approval-Guard"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-300 hover:text-white flex items-center gap-1 font-semibold"
-            >
-              <span>GitHub</span>
-              <ExternalLink className="w-3 h-3" />
-            </a>
           </div>
         </div>
       </footer>
