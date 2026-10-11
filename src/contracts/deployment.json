@@ -1,0 +1,11 @@
+{
+  "contract": "ApprovalGuard",
+  "address": "0xb8a58c3bbfeb9227ac2e6e3c0791a93b9970ff35",
+  "deployer": "0x293ed7F710D056887C6e3Ef5EdBC9B95e32f03a4",
+  "network": "BOT Chain Testnet",
+  "chainId": 968,
+  "txHash": "0xa94f1b1d89f4cb68d9812edbe6793047d4b82a2d37fd25d988d6e36bc10e870a",
+  "blockNumber": "26474869",
+  "timestamp": "2026-10-11T10:47:15.458Z",
+  "explorerUrl": "https://scan.bohr.life/address/0xb8a58c3bbfeb9227ac2e6e3c0791a93b9970ff35"
+}
