@@ -37,7 +37,7 @@ export const WhitepaperModal: React.FC<WhitepaperModalProps> = ({ onClose }) => 
               <span className="badge badge-safe text-[9px] py-0.5 px-2">v1.0.0</span>
             </h3>
             <p className="text-xs text-slate-400">
-              Technical Specification & Protocol Architecture on BOT Chain (968)
+              Technical Specification & Protocol Architecture on BOT Chain (677)
             </p>
           </div>
         </div>
@@ -59,7 +59,7 @@ export const WhitepaperModal: React.FC<WhitepaperModalProps> = ({ onClose }) => 
               <div className="flex items-center gap-3 mt-2 text-[10px] mono text-slate-400">
                 <span>Contract: <strong className="text-emerald-400">{DEFAULT_APPROVAL_GUARD_ADDRESS.slice(0, 10)}...</strong></span>
                 <span>•</span>
-                <span>Chain ID: <strong className="text-slate-200">968</strong></span>
+                <span>Chain ID: <strong className="text-slate-200">677 (Mainnet)</strong></span>
               </div>
             </div>
           </div>
@@ -146,12 +146,12 @@ export const WhitepaperModal: React.FC<WhitepaperModalProps> = ({ onClose }) => 
         {/* Footer */}
         <div className="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-xs flex-shrink-0">
           <a
-            href="https://scan.bohr.life/address/0xb8a58c3bbfeb9227ac2e6e3c0791a93b9970ff35"
+            href={`https://scan.botchain.ai/address/${DEFAULT_APPROVAL_GUARD_ADDRESS}`}
             target="_blank"
             rel="noopener noreferrer"
             className="text-emerald-400 hover:text-emerald-300 flex items-center gap-1 font-semibold"
           >
-            <span>Contract on Bohr Scan</span>
+            <span>Contract on BOT Scan</span>
             <ExternalLink className="w-3.5 h-3.5" />
           </a>
 

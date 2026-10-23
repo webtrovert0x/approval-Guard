@@ -28,34 +28,34 @@ if (!privateKey.startsWith('0x')) {
 const account = privateKeyToAccount(privateKey);
 console.log('Deployer address:', account.address);
 
-// BOT Chain config
-const botChain = {
-  id: 968,
-  name: 'BOT Chain Testnet',
+// BOT Chain Mainnet config
+const botChainMainnet = {
+  id: 677,
+  name: 'BOT Chain Mainnet',
   nativeCurrency: { name: 'BOT', symbol: 'BOT', decimals: 18 },
   rpcUrls: {
-    default: { http: ['https://rpc.bohr.life'] },
-    public: { http: ['https://rpc.bohr.life'] },
+    default: { http: ['https://rpc.botchain.ai'] },
+    public: { http: ['https://rpc.botchain.ai'] },
   },
 };
 
 const publicClient = createPublicClient({
-  chain: botChain,
-  transport: http('https://rpc.bohr.life'),
+  chain: botChainMainnet,
+  transport: http('https://rpc.botchain.ai'),
 });
 
 const walletClient = createWalletClient({
   account,
-  chain: botChain,
-  transport: http('https://rpc.bohr.life'),
+  chain: botChainMainnet,
+  transport: http('https://rpc.botchain.ai'),
 });
 
 async function main() {
   const balance = await publicClient.getBalance({ address: account.address });
-  console.log('Deployer balance:', (Number(balance) / 1e18).toFixed(4), 'BOT');
+  console.log('Deployer balance:', (Number(balance) / 1e18).toFixed(6), 'BOT');
 
   if (balance === 0n) {
-    console.error('Deployer account has 0 BOT balance. Please ensure it has testnet BOT for gas.');
+    console.error('Deployer account has 0 BOT balance. Please ensure it has BOT for gas.');
     process.exit(1);
   }
 
@@ -68,15 +68,31 @@ async function main() {
 
   const { abi, bytecode } = JSON.parse(fs.readFileSync(contractJsonPath, 'utf8'));
 
-  console.log('Deploying ApprovalGuard.sol to BOT Chain (Chain ID: 968)...');
+  const formattedBytecode = '0x' + bytecode.replace(/^0x/, '');
+
+  console.log('Estimating gas for deployment...');
+  const estimatedGas = await publicClient.estimateGas({
+    account: account.address,
+    data: formattedBytecode,
+  });
+  console.log('Estimated Gas:', estimatedGas.toString());
+
+  const gasPrice = await publicClient.getGasPrice();
+  console.log('Current Gas Price:', gasPrice.toString(), 'wei (' + (Number(gasPrice) / 1e9) + ' gwei)');
+  const totalCost = (Number(estimatedGas * gasPrice) / 1e18);
+  console.log('Total Estimated Cost:', totalCost.toFixed(6), 'BOT');
+
+  console.log('\nDeploying ApprovalGuard.sol to BOT Chain Mainnet (Chain ID: 677)...');
   const hash = await walletClient.deployContract({
     abi,
-    bytecode: '0x' + bytecode.replace(/^0x/, ''),
+    bytecode: formattedBytecode,
     args: [],
+    gas: estimatedGas + 50000n, // safe minimal buffer
+    gasPrice,
   });
 
   console.log('Deployment transaction broadcasted! Tx Hash:', hash);
-  console.log('Waiting for block confirmation on BOT Chain...');
+  console.log('Waiting for block confirmation on BOT Chain Mainnet...');
 
   const receipt = await publicClient.waitForTransactionReceipt({ hash });
   const deployedAddress = receipt.contractAddress;
@@ -87,10 +103,11 @@ async function main() {
   console.log('Contract Address:', deployedAddress);
   console.log('Block Number:    ', receipt.blockNumber.toString());
   console.log('Gas Used:        ', receipt.gasUsed.toString());
-  console.log('Bohr Scan URL:   ', `https://scan.bohr.life/address/${deployedAddress}`);
-  console.log('Tx Receipt URL:  ', `https://scan.bohr.life/tx/${hash}\n`);
+  console.log('Actual Cost:     ', (Number(receipt.gasUsed * (receipt.effectiveGasPrice || gasPrice)) / 1e18).toFixed(6), 'BOT');
+  console.log('Explorer URL:    ', `https://scan.botchain.ai/address/${deployedAddress}`);
+  console.log('Tx Receipt URL:  ', `https://scan.botchain.ai/tx/${hash}\n`);
 
-  // Update src/config/abi.ts with real deployed address
+  // Update src/config/abi.ts with real deployed address and new ABI
   const abiTsPath = path.resolve(__dirname, '../src/config/abi.ts');
   let abiTsContent = fs.readFileSync(abiTsPath, 'utf8');
   abiTsContent = abiTsContent.replace(
@@ -105,12 +122,12 @@ async function main() {
     contract: 'ApprovalGuard',
     address: deployedAddress,
     deployer: account.address,
-    network: 'BOT Chain Testnet',
-    chainId: 968,
+    network: 'BOT Chain Mainnet',
+    chainId: 677,
     txHash: hash,
     blockNumber: receipt.blockNumber.toString(),
     timestamp: new Date().toISOString(),
-    explorerUrl: `https://scan.bohr.life/address/${deployedAddress}`,
+    explorerUrl: `https://scan.botchain.ai/address/${deployedAddress}`,
   };
 
   fs.writeFileSync(

@@ -139,7 +139,7 @@ export const AddTokenModal: React.FC<AddTokenModalProps> = ({
                 </div>
                 <div>
                   <span className="text-slate-400">Chain:</span>{' '}
-                  <span className="text-emerald-400 font-semibold">BOT (968)</span>
+                  <span className="text-emerald-400 font-semibold">BOT (677)</span>
                 </div>
               </div>
             </div>

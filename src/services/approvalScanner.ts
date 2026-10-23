@@ -6,7 +6,7 @@ import type { ApprovalRecord, TokenInfo, SpenderInfo } from '../types';
 
 export const publicClient = createPublicClient({
   chain: botChain,
-  transport: http('https://rpc.bohr.life'),
+  transport: http('https://rpc.botchain.ai'),
 });
 
 // Web Audio API Security Alert Sound (no external assets needed)

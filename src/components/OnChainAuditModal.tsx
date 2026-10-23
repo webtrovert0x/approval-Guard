@@ -158,12 +158,12 @@ export const OnChainAuditModal: React.FC<OnChainAuditModalProps> = ({
               </p>
               <div className="pt-2">
                 <a
-                  href={`https://scan.bohr.life/tx/${finalTxHash}`}
+                  href={`https://scan.botchain.ai/tx/${finalTxHash}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-xs text-emerald-400 hover:text-emerald-300 font-semibold underline"
                 >
-                  <span>View Receipt on Bohr Scan</span>
+                  <span>View Receipt on BOT Scan</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               </div>

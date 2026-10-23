@@ -3,10 +3,10 @@ import { WagmiAdapter } from '@reown/appkit-adapter-wagmi';
 import { defineChain } from 'viem';
 import { http } from 'wagmi';
 
-// 1. Define custom BOT Chain (Testnet 968)
+// 1. Define BOT Chain Mainnet (Chain ID 677)
 export const botChain = defineChain({
-  id: 968,
-  name: 'BOT Chain Testnet',
+  id: 677,
+  name: 'BOT Chain Mainnet',
   nativeCurrency: {
     name: 'BOT',
     symbol: 'BOT',
@@ -14,19 +14,19 @@ export const botChain = defineChain({
   },
   rpcUrls: {
     default: {
-      http: ['https://rpc.bohr.life'],
+      http: ['https://rpc.botchain.ai'],
     },
     public: {
-      http: ['https://rpc.bohr.life'],
+      http: ['https://rpc.botchain.ai'],
     },
   },
   blockExplorers: {
     default: {
-      name: 'Bohr Scan',
-      url: 'https://scan.bohr.life',
+      name: 'BOT Scan',
+      url: 'https://scan.botchain.ai',
     },
   },
-  testnet: true,
+  testnet: false,
 });
 
 // 2. Reown AppKit Project ID
@@ -39,7 +39,7 @@ export const wagmiAdapter = new WagmiAdapter({
   networks: [botChain],
   projectId,
   transports: {
-    [botChain.id]: http('https://rpc.bohr.life'),
+    [botChain.id]: http('https://rpc.botchain.ai'),
   },
 });
 
@@ -49,8 +49,8 @@ export const config = wagmiAdapter.wagmiConfig;
 export const metadata = {
   name: 'BOT Approval Guard',
   description: 'Smart-Contract Approval Management & Security Tool on BOT Chain',
-  url: 'https://approvalguard.bohr.life',
-  icons: ['https://scan.bohr.life/favicon.ico'],
+  url: 'https://approvalguard.botchain.ai',
+  icons: ['https://scan.botchain.ai/favicon.ico'],
 };
 
 // 5. Initialize AppKit

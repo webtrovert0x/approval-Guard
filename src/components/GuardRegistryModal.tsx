@@ -331,7 +331,7 @@ export const GuardRegistryModal: React.FC<GuardRegistryModalProps> = ({
               <div className="flex justify-between">
                 <span className="text-slate-400">Network:</span>
                 <span className="text-slate-200 font-semibold">
-                  BOT Chain Testnet (Chain ID: 968)
+                  BOT Chain Mainnet (Chain ID: 677)
                 </span>
               </div>
               <div className="flex justify-between">
@@ -340,18 +340,18 @@ export const GuardRegistryModal: React.FC<GuardRegistryModalProps> = ({
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-400">RPC Endpoint:</span>
-                <span className="text-slate-200 mono">https://rpc.bohr.life</span>
+                <span className="text-slate-200 mono">https://rpc.botchain.ai</span>
               </div>
             </div>
 
             <div className="pt-2 flex justify-end">
               <a
-                href={`https://scan.bohr.life/address/${DEFAULT_APPROVAL_GUARD_ADDRESS}`}
+                href={`https://scan.botchain.ai/address/${DEFAULT_APPROVAL_GUARD_ADDRESS}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-secondary text-xs py-2 px-3 flex items-center gap-1.5"
               >
-                <span>View on Bohr Scan</span>
+                <span>View on BOT Scan</span>
                 <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
               </a>
             </div>

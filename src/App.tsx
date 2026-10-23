@@ -297,7 +297,7 @@ export function ApprovalGuardApp() {
   }, [approvals, selectedIds]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[var(--bg-primary)]">
+    <div className="w-full min-h-screen bg-[var(--bg-primary)] text-slate-100 flex flex-col justify-between">
       {/* Navbar */}
       <Navbar
         searchedAddress={searchedAddress}
@@ -332,7 +332,7 @@ export function ApprovalGuardApp() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-3.5 space-y-3">
+      <main className="flex-1 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-6">
         {/* High Severity Live Alert Banner */}
         {!bannerDismissed && topCriticalApproval && (
           <LiveAlertBanner
@@ -379,35 +379,35 @@ export function ApprovalGuardApp() {
         />
 
         {/* Informational Callout / Guard Principles */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
-          <div className="glass-panel p-3 text-xs space-y-1 border-slate-800">
-            <div className="font-bold text-slate-200 flex items-center gap-1.5 text-[11px]">
-              <Lock className="w-3.5 h-3.5 text-emerald-400" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
+          <div className="glass-panel p-4 text-xs space-y-1.5 border-slate-800">
+            <div className="font-bold text-slate-100 flex items-center gap-2 text-xs">
+              <Lock className="w-4 h-4 text-emerald-400" />
               <span>Token Safety</span>
             </div>
-            <p className="text-slate-400 leading-relaxed text-[10px]">
+            <p className="text-slate-400 leading-relaxed text-[11px]">
               Permissions stay active until you remove them. Disconnecting apps ensures
               old apps can never access your tokens without permission.
             </p>
           </div>
 
-          <div className="glass-panel p-3 text-xs space-y-1 border-slate-800">
-            <div className="font-bold text-slate-200 flex items-center gap-1.5 text-[11px]">
-              <Radio className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="glass-panel p-4 text-xs space-y-1.5 border-slate-800">
+            <div className="font-bold text-slate-100 flex items-center gap-2 text-xs">
+              <Radio className="w-4 h-4 text-cyan-400" />
               <span>Live Alerts</span>
             </div>
-            <p className="text-slate-400 leading-relaxed text-[10px]">
+            <p className="text-slate-400 leading-relaxed text-[11px]">
               Approval Guard watches your wallet and warns you immediately whenever
               an app requests access to your tokens.
             </p>
           </div>
 
-          <div className="glass-panel p-3 text-xs space-y-1 border-slate-800">
-            <div className="font-bold text-slate-200 flex items-center gap-1.5 text-[11px]">
-              <Layers className="w-3.5 h-3.5 text-amber-400" />
+          <div className="glass-panel p-4 text-xs space-y-1.5 border-slate-800">
+            <div className="font-bold text-slate-100 flex items-center gap-2 text-xs">
+              <Layers className="w-4 h-4 text-amber-400" />
               <span>Security Rules</span>
             </div>
-            <p className="text-slate-400 leading-relaxed text-[10px]">
+            <p className="text-slate-400 leading-relaxed text-[11px]">
               Set spending limits for your tokens and keep a trusted list of safe apps
               directly on BOT Chain.
             </p>
@@ -415,34 +415,114 @@ export function ApprovalGuardApp() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-slate-800/80 bg-slate-950/80 py-3 text-[11px] text-slate-400 mt-auto">
-        <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-2">
-          <div className="flex items-center gap-2">
-            <span className="font-bold text-white">BOT Approval Guard</span>
-            <span>•</span>
-            <span>BOT Chain Security Ecosystem</span>
+      {/* Ecosystem Showcase Section */}
+      <section className="border-t border-slate-800/80 bg-slate-900/60 py-6 px-4 sm:px-6 lg:px-8 mt-8">
+        <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+          {/* BOT Chain Branding & Logo */}
+          <div className="flex items-center gap-3.5">
+            <div className="w-9 h-9 rounded-full overflow-hidden border border-emerald-500/40 shadow-[0_0_15px_rgba(16,185,129,0.3)] flex-shrink-0 bg-black flex items-center justify-center">
+              <img src="/botchain_logo.jpeg" alt="BOT Chain Logo" className="w-full h-full object-cover" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-white text-sm tracking-wide">BOT Chain Ecosystem</span>
+                <span className="badge badge-safe text-[10px] py-0.5 px-2">Mainnet 677</span>
+              </div>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Official smart contract security & token approval protection protocol
+              </p>
+            </div>
           </div>
 
-          <div className="flex items-center gap-6 text-slate-400 flex-wrap justify-center">
+          {/* Links with BOT Chain logo in front */}
+          <div className="flex items-center gap-3 flex-wrap justify-center text-xs">
+            {/* BOT Chain Website Link */}
+            <a
+              href="https://botchain.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-800/90 hover:bg-slate-800 border border-slate-700/80 hover:border-emerald-500/50 text-slate-200 transition group shadow-sm"
+            >
+              <img
+                src="/botchain_logo.jpeg"
+                alt="BOT Chain Logo"
+                className="w-4 h-4 rounded-full object-cover flex-shrink-0 group-hover:scale-110 transition-transform"
+              />
+              <span className="text-slate-400 font-normal">BOT Chain website:</span>
+              <span className="font-semibold text-emerald-400 group-hover:text-emerald-300 underline underline-offset-2">
+                https://botchain.ai
+              </span>
+              <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-emerald-300" />
+            </a>
+
+            {/* BOT Chain Explorer Link */}
+            <a
+              href="https://scan.botchain.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-800/90 hover:bg-slate-800 border border-slate-700/80 hover:border-emerald-500/50 text-slate-200 transition group shadow-sm"
+            >
+              <img
+                src="/botchain_logo.jpeg"
+                alt="BOT Chain Logo"
+                className="w-4 h-4 rounded-full object-cover flex-shrink-0 group-hover:scale-110 transition-transform"
+              />
+              <span className="text-slate-400 font-normal">BOT Chain explorer:</span>
+              <span className="font-semibold text-emerald-400 group-hover:text-emerald-300 underline underline-offset-2">
+                https://scan.botchain.ai
+              </span>
+              <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-emerald-300" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-slate-800/80 bg-slate-950/90 py-5 text-xs text-slate-400">
+        <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-3">
+          <div className="flex items-center gap-2.5">
+            <img
+              src="/botchain_logo.jpeg"
+              alt="BOT Chain"
+              className="w-4 h-4 rounded-full object-cover inline-block border border-emerald-500/30"
+            />
+            <span className="font-bold text-white">BOT Approval Guard</span>
+            <span>•</span>
+            <span>Powered by BOT Chain</span>
+          </div>
+
+          <div className="flex items-center gap-5 text-slate-400 flex-wrap justify-center text-[11px]">
             <span>
-              Chain ID: <strong className="text-slate-200 mono">968</strong>
+              Chain ID: <strong className="text-slate-200 mono">677</strong>
             </span>
             <span>
-              RPC: <strong className="text-slate-200 mono">https://rpc.bohr.life</strong>
+              RPC: <strong className="text-slate-200 mono">https://rpc.botchain.ai</strong>
             </span>
             <span>
               Native Token: <strong className="text-emerald-400 mono">BOT</strong> (150M Supply)
             </span>
-            <a
-              href="https://scan.bohr.life/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-emerald-400 hover:text-emerald-300 flex items-center gap-1 font-semibold"
-            >
-              <span>Bohr Scan</span>
-              <ExternalLink className="w-3 h-3" />
-            </a>
+            <div className="flex items-center gap-3">
+              <a
+                href="https://botchain.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-slate-300 hover:text-emerald-400 transition"
+              >
+                <img src="/botchain_logo.jpeg" alt="BOT Chain" className="w-3.5 h-3.5 rounded-full object-cover" />
+                <span>BOT Chain</span>
+                <ExternalLink className="w-2.5 h-2.5 text-slate-500" />
+              </a>
+              <a
+                href="https://scan.botchain.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-slate-300 hover:text-emerald-400 transition"
+              >
+                <img src="/botchain_logo.jpeg" alt="BOT Chain" className="w-3.5 h-3.5 rounded-full object-cover" />
+                <span>Explorer</span>
+                <ExternalLink className="w-2.5 h-2.5 text-slate-500" />
+              </a>
+            </div>
           </div>
         </div>
       </footer>

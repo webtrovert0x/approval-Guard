@@ -174,12 +174,12 @@ export const BatchRevokeModal: React.FC<BatchRevokeModalProps> = ({
 
                   {txHashes[rec.id] && (
                     <a
-                      href={`https://scan.bohr.life/tx/${txHashes[rec.id]}`}
+                      href={`https://scan.botchain.ai/tx/${txHashes[rec.id]}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-emerald-400 hover:text-emerald-300 text-[11px] flex items-center gap-1"
                     >
-                      <span>Bohr Scan</span>
+                      <span>BOT Scan</span>
                       <ExternalLink className="w-3 h-3" />
                     </a>
                   )}

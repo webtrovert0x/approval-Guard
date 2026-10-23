@@ -139,7 +139,7 @@ export const ApprovalHistoryModal: React.FC<ApprovalHistoryModalProps> = ({
                   </span>
                   {item.txHash && (
                     <a
-                      href={`https://scan.bohr.life/tx/${item.txHash}`}
+                      href={`https://scan.botchain.ai/tx/${item.txHash}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-emerald-400 hover:text-emerald-300 text-[11px] flex items-center gap-1 font-semibold"

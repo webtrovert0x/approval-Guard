@@ -80,4 +80,4 @@ export const approvalGuardAbi = ApprovalGuardJson.abi;
 export const approvalGuardBytecode = ApprovalGuardJson.bytecode;
 
 // Pre-set or user-deployed ApprovalGuard registry address on BOT Chain
-export const DEFAULT_APPROVAL_GUARD_ADDRESS = '0xb8a58c3bbfeb9227ac2e6e3c0791a93b9970ff35' as `0x${string}`;
+export const DEFAULT_APPROVAL_GUARD_ADDRESS = '0x1308bcc49fd9e4ef533c0915e6cb3a0a0d16cbf5' as `0x${string}`;

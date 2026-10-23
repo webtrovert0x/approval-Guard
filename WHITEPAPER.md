@@ -1,9 +1,9 @@
 # BOT Approval Guard Whitepaper
 ### Autonomous Smart-Contract Security, Gas-Metered Allowance Auditing & Decentralized Risk Defense on BOT Chain
-**Version:** 1.0.0 | **Network:** BOT Chain Testnet (Chain ID: `968`)  
-**Core Registry Contract:** [`0xb8a58c3bbfeb9227ac2e6e3c0791a93b9970ff35`](https://scan.bohr.life/address/0xb8a58c3bbfeb9227ac2e6e3c0791a93b9970ff35)  
+**Version:** 1.0.0 | **Network:** BOT Chain Mainnet (Chain ID: `677`)  
+**Core Registry Contract:** [`0x1308bcc49fd9e4ef533c0915e6cb3a0a0d16cbf5`](https://scan.botchain.ai/address/0x1308bcc49fd9e4ef533c0915e6cb3a0a0d16cbf5)  
 **Native Currency:** BOT (18 decimals, 150M Total Fixed Supply)  
-**RPC Endpoint:** `https://rpc.bohr.life` | **Explorer:** `https://scan.bohr.life`
+**RPC Endpoint:** `https://rpc.botchain.ai` | **Website:** `https://botchain.ai` | **Explorer:** `https://scan.botchain.ai`
 
 ---
 
@@ -13,7 +13,7 @@ Decentralized finance (DeFi) protocols rely ubiquitously on the ERC-20 token sta
 
 While convenient, unlimited approvals create persistent, dormant attack surfaces. If an approved spender contract contains a logic bug, is upgraded by an attacker, or suffers a private key compromise, **all wallets with outstanding allowances can be drained instantly without any further user interaction**.
 
-**BOT Approval Guard** is an institutional-grade, non-custodial smart-contract security protocol and real-time allowance watchdog engineered natively for **BOT Chain (Chain ID: 968)**. It empowers users and protocol treasuries to:
+**BOT Approval Guard** is an institutional-grade, non-custodial smart-contract security protocol and real-time allowance watchdog engineered natively for **BOT Chain (Chain ID: 677)**. It empowers users and protocol treasuries to:
 1. Conduct real-time, gas-metered audits recorded immutably on-chain.
 2. Detect and score infinite allowances and unverified contract spenders.
 3. Execute instantaneous single-click and batch revocations via direct `approve(spender, 0)` calls.
@@ -44,14 +44,14 @@ BOT Approval Guard operates through a hybrid architecture combining a high-speed
 ```mermaid
 graph TD
     User([User Wallet / Treasury]) -->|1. Connect or Query| DApp[BOT Approval Guard DApp]
-    DApp -->|2. Multi-Contract Read| RPC[BOT Chain RPC: rpc.bohr.life]
+    DApp -->|2. Multi-Contract Read| RPC[BOT Chain RPC: rpc.botchain.ai]
     RPC -->|3. Query Allowance Matrix| ERC20[ERC-20 Token Contracts]
     ERC20 -->|4. Return Raw Balances & Allowances| DApp
     
     DApp -->|5. Evaluate Risk Matrix| Engine[Risk Assessment Engine]
     Engine -->|6. Health Score & Alerts| User
     
-    User -->|7. Execute Audit Scan + Gas| GuardContract["ApprovalGuard.sol (0xb8a58c...)"]
+    User -->|7. Execute Audit Scan + Gas| GuardContract["ApprovalGuard.sol (0x1308bc...)"]
     GuardContract -->|8. Emit ScanAuditExecuted Event| Chain[(BOT Chain Ledger)]
     
     User -->|9. Direct Revoke / Batch Revoke| ERC20
@@ -59,8 +59,8 @@ graph TD
 ```
 
 ### 3.1 Smart Contract: `ApprovalGuard.sol`
-Deployed on BOT Chain Testnet at:
-`0xb8a58c3bbfeb9227ac2e6e3c0791a93b9970ff35` (Block `26474869`).
+Deployed on BOT Chain Mainnet at:
+`0x1308bcc49fd9e4ef533c0915e6cb3a0a0d16cbf5` (Block `27700125`).
 
 #### Core Storage and State:
 * `scanFee`: Dynamic protocol security fee (currently $0.0001\text{ BOT}$).
@@ -111,7 +111,7 @@ IERC20(tokenAddress).approve(spenderAddress, 0);
 Upon confirmation, the spender's permission is set to exactly `0`, mitigating all exposure.
 
 ### 5.2 Sequential Batch Revocation
-Due to EVM nonce ordering, batch revocations are queued sequentially with real-time UI progression tracking. Each step emits a distinct cryptographic transaction receipt on BOT Chain (`scan.bohr.life`), preventing transaction collisions.
+Due to EVM nonce ordering, batch revocations are queued sequentially with real-time UI progression tracking. Each step emits a distinct cryptographic transaction receipt on BOT Chain (`scan.botchain.ai`), preventing transaction collisions.
 
 ### 5.3 Custom Allowance Capping
 Rather than revoking permissions entirely (which requires re-approving before every trade), users can set precise custom caps (e.g., $50\text{ USDT}$):
@@ -135,15 +135,15 @@ BOT Approval Guard operates on the high-throughput, low-fee BOT Chain infrastruc
 
 1. **Zero Asset Custody:** BOT Approval Guard never receives, holds, or proxies user ERC-20 tokens or native BOT.
 2. **Permissionless & Trustless:** Anyone can audit any wallet address public on BOT Chain without authentication.
-3. **Verified Smart Contract:** The contract source code is verified on the Bohr Scan explorer API and completely open-source.
+3. **Verified Smart Contract:** The contract source code is verified on the BOT Scan explorer API and completely open-source.
 
 ---
 
 ## 8. Roadmap
 
-* **Phase 1 (Completed):** Protocol deployment on BOT Chain (Chain ID: 968), live Allowance Scanner, Gas-Metered Audit Scans, Batch Revocations, and ApprovalGuard.sol Registry.
+* **Phase 1 (Completed):** Protocol deployment on BOT Chain Mainnet (Chain ID: 677), live Allowance Scanner, Gas-Metered Audit Scans, Batch Revocations, and ApprovalGuard.sol Registry.
 * **Phase 2 (Q4 2026):** Automated Watchdog Webhooks & Telegram/Discord alert bots integrated with BOT Chain RPC event subscriptions.
-* **Phase 3 (Q1 2027):** Cross-Chain Guardian Expansion with Bohr Bridge monitoring and automated emergency flash-revoke triggers.
+* **Phase 3 (Q1 2027):** Cross-Chain Guardian Expansion with BOT Bridge monitoring and automated emergency flash-revoke triggers.
 
 ---
 

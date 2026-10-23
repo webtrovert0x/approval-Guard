@@ -5,6 +5,7 @@ import {
   Trash2,
   SlidersHorizontal,
   Zap,
+  X,
 } from 'lucide-react';
 
 interface ApprovalFiltersProps {
@@ -42,57 +43,62 @@ export const ApprovalFilters: React.FC<ApprovalFiltersProps> = ({
   counts,
 }) => {
   return (
-    <div className="flex flex-col gap-2.5 my-1">
-      <div className="flex flex-wrap items-center justify-between gap-2.5">
-        {/* Filter Pills */}
-        <div className="flex items-center gap-2 flex-wrap">
+    <div className="flex flex-col gap-4 my-2">
+      {/* Top Controls: Segmented Pills & Primary Action Buttons */}
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        {/* Segmented Control Bar */}
+        <div className="segmented-control-container">
           <button
             onClick={() => setActiveFilter('ALL')}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition border ${
-              activeFilter === 'ALL'
-                ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/50 shadow-[0_0_12px_rgba(16,185,129,0.2)]'
-                : 'bg-slate-900 text-slate-400 border-slate-800 hover:text-slate-200'
-            }`}
+            className={`segmented-tab ${activeFilter === 'ALL' ? 'active-all' : ''}`}
           >
-            All Permissions ({counts.all})
+            <span>All Permissions</span>
+            <span className="px-1.5 py-0.2 rounded-full bg-slate-800 text-[10px] font-bold">
+              {counts.all}
+            </span>
           </button>
 
           <button
             onClick={() => setActiveFilter('UNLIMITED')}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition border ${
-              activeFilter === 'UNLIMITED'
-                ? 'bg-rose-500/20 text-rose-300 border-rose-500/60 shadow-[0_0_12px_rgba(244,63,94,0.25)]'
-                : 'bg-slate-900 text-slate-400 border-slate-800 hover:text-rose-300'
-            }`}
+            className={`segmented-tab ${activeFilter === 'UNLIMITED' ? 'active-unlimited' : ''}`}
           >
-            Unlimited Access ({counts.unlimited})
+            <span>Unlimited Access</span>
+            <span
+              className={`px-1.5 py-0.2 rounded-full text-[10px] font-bold ${
+                counts.unlimited > 0 ? 'bg-rose-950 text-rose-300' : 'bg-slate-800 text-slate-400'
+              }`}
+            >
+              {counts.unlimited}
+            </span>
           </button>
 
           <button
             onClick={() => setActiveFilter('RISKY')}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition border ${
-              activeFilter === 'RISKY'
-                ? 'bg-amber-500/20 text-amber-300 border-amber-500/60 shadow-[0_0_12px_rgba(245,158,11,0.25)]'
-                : 'bg-slate-900 text-slate-400 border-slate-800 hover:text-amber-300'
-            }`}
+            className={`segmented-tab ${activeFilter === 'RISKY' ? 'active-risky' : ''}`}
           >
-            Risky & Unknown ({counts.risky})
+            <span>Risky & Unknown</span>
+            <span
+              className={`px-1.5 py-0.2 rounded-full text-[10px] font-bold ${
+                counts.risky > 0 ? 'bg-amber-950 text-amber-300' : 'bg-slate-800 text-slate-400'
+              }`}
+            >
+              {counts.risky}
+            </span>
           </button>
 
           <button
             onClick={() => setActiveFilter('SAFE')}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition border ${
-              activeFilter === 'SAFE'
-                ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/60'
-                : 'bg-slate-900 text-slate-400 border-slate-800 hover:text-emerald-300'
-            }`}
+            className={`segmented-tab ${activeFilter === 'SAFE' ? 'active-safe' : ''}`}
           >
-            Safe Limits ({counts.safe})
+            <span>Safe Limits</span>
+            <span className="px-1.5 py-0.2 rounded-full bg-slate-800 text-[10px] font-bold">
+              {counts.safe}
+            </span>
           </button>
         </div>
 
-        {/* Action Buttons: Batch Revoke + Add Token + Scan */}
-        <div className="flex items-center gap-2 flex-wrap">
+        {/* Action Buttons: Batch Revoke + Add Custom Token + Scan Trigger */}
+        <div className="flex items-center gap-2.5 flex-wrap">
           {selectedCount > 0 && (
             <button
               onClick={onOpenBatchRevoke}
@@ -107,10 +113,10 @@ export const ApprovalFilters: React.FC<ApprovalFiltersProps> = ({
           <button
             onClick={onOpenAddToken}
             id="btn-add-custom-token"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center gap-1.5"
-            title="Add a token to check"
+            className="btn btn-secondary text-xs py-2 px-3.5 flex items-center gap-2"
+            title="Add a custom token to scan"
           >
-            <PlusCircle className="w-3.5 h-3.5 text-emerald-400" />
+            <PlusCircle className="w-4 h-4 text-emerald-400" />
             <span>Add Token</span>
           </button>
 
@@ -118,39 +124,48 @@ export const ApprovalFilters: React.FC<ApprovalFiltersProps> = ({
             onClick={onOnChainAudit}
             disabled={isScanning}
             id="btn-scan-approvals"
-            className="btn btn-primary text-xs py-2 px-4 flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.3)]"
-            title="Check wallet security (0.0001 BOT fee)"
+            className="btn btn-primary text-xs py-2 px-4 flex items-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.35)]"
+            title="Scan wallet approvals (0.0001 BOT protocol fee)"
           >
             <Zap className="w-3.5 h-3.5 text-amber-300 fill-current" />
-            <span>{isScanning ? 'Scanning...' : 'Scan (0.0001 BOT)'}</span>
+            <span>{isScanning ? 'Scanning On-Chain...' : 'Scan Approvals (0.0001 BOT)'}</span>
           </button>
         </div>
       </div>
 
-      {/* Search and Sort Row */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2">
-        <div className="search-input-wrapper sm:max-w-md">
+      {/* Bottom Bar: Search Field + Sort Selector */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-1">
+        <div className="search-input-wrapper sm:max-w-md relative">
           <Search className="w-4 h-4 text-slate-400 flex-shrink-0" />
           <input
             type="text"
             id="input-filter-approvals"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search by token name or app..."
+            placeholder="Search by token symbol, name or spender..."
+            className="pr-6"
           />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3 text-slate-400 hover:text-white"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          )}
         </div>
 
         <div className="flex items-center gap-2 self-end sm:self-auto text-xs text-slate-400">
-          <SlidersHorizontal className="w-3.5 h-3.5" />
-          <span>Sort by:</span>
+          <SlidersHorizontal className="w-3.5 h-3.5 text-slate-400" />
+          <span className="font-medium">Sort by:</span>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as 'RISK' | 'TOKEN' | 'ALLOWANCE')}
-            className="bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500"
+            className="bg-slate-900 border border-slate-800 rounded-xl px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500 font-medium cursor-pointer"
           >
-            <option value="RISK">Highest Risk First</option>
-            <option value="ALLOWANCE">Unlimited Access First</option>
-            <option value="TOKEN">Token Name (A-Z)</option>
+            <option value="RISK">Highest Security Risk</option>
+            <option value="ALLOWANCE">Unlimited Allowances First</option>
+            <option value="TOKEN">Token Symbol (A-Z)</option>
           </select>
         </div>
       </div>

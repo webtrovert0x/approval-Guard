@@ -6,7 +6,8 @@ import {
   Check,
   Edit3,
   Trash2,
-  AlertOctagon,
+  Zap,
+  ArrowRight,
 } from 'lucide-react';
 import type { ApprovalRecord } from '../types';
 
@@ -49,65 +50,68 @@ export const ApprovalTable: React.FC<ApprovalTableProps> = ({
   // 1. Fee Gate: Wallet has not paid the on-chain scan fee yet
   if (!hasAuditedWallet) {
     return (
-      <div className="empty-state-card border-amber-500/30 bg-slate-900/80 my-2 p-5">
-        <div className="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/40 flex items-center justify-center text-amber-400 mb-2 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
-          <AlertOctagon className="w-5 h-5" />
+      <div className="glass-panel my-6 p-8 sm:p-10 border-slate-800 text-center flex flex-col items-center justify-center">
+        <div className="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-4 shadow-[0_0_20px_rgba(16,185,129,0.25)]">
+          <ShieldCheck className="w-7 h-7" />
         </div>
-        <div className="flex items-center gap-2 mb-1 flex-wrap justify-center">
-          <h3 className="text-sm font-bold text-slate-100">
+
+        <div className="flex items-center gap-2 mb-2 flex-wrap justify-center">
+          <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
             Security Scan Required
           </h3>
-          <span className="badge badge-elevated text-[10px]">
+          <span className="badge badge-elevated text-[11px] py-1 px-3">
             0.0001 BOT Fee
           </span>
         </div>
-        <p className="mt-1 text-xs text-slate-400 max-w-lg mx-auto leading-relaxed">
+
+        <p className="mt-2 text-xs sm:text-sm text-slate-400 max-w-xl mx-auto leading-relaxed">
           {activeAccount ? (
             <>
-              Wallet <span className="mono text-slate-200">{activeAccount.slice(0, 10)}...{activeAccount.slice(-8)}</span> has not been checked yet. BOT Approval Guard requires a <strong className="text-amber-300">0.0001 BOT scan fee</strong> to check which apps have permission to spend your tokens.
+              Wallet <span className="mono font-semibold text-slate-200">{activeAccount.slice(0, 10)}...{activeAccount.slice(-8)}</span> has not been checked yet. Approval Guard requires a <strong className="text-amber-300">0.0001 BOT scan fee</strong> to query live smart contracts on BOT Chain and identify apps with permission to spend your tokens.
             </>
           ) : (
-            'Connect your wallet or enter an address to scan which apps have access to your tokens.'
+            'Connect your wallet or enter an address above to scan which apps have access to your tokens.'
           )}
         </p>
 
-        <div className="mt-3.5 flex items-center justify-center gap-3">
+        <div className="mt-6 flex items-center justify-center gap-3">
           <button
             onClick={onRequireAuditScan}
             id="btn-gate-execute-audit"
-            className="btn btn-primary text-xs py-2 px-4 flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.35)]"
+            className="btn btn-primary text-sm py-3 px-6 flex items-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.35)] font-bold"
           >
-            <ShieldCheck className="w-4 h-4" />
+            <Zap className="w-4 h-4 text-amber-300 fill-current" />
             <span>Run Security Scan (0.0001 BOT)</span>
+            <ArrowRight className="w-4 h-4 ml-1" />
           </button>
         </div>
       </div>
     );
   }
 
-  // 2. Audited, but zero approvals found
+  // 2. Audited with Zero Approvals Found
   if (approvals.length === 0) {
     return (
-      <div className="empty-state-card my-6">
-        <div className="empty-state-icon-box">
+      <div className="glass-panel my-6 p-8 sm:p-12 text-center flex flex-col items-center border-slate-800">
+        <div className="w-16 h-16 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-4 shadow-[0_0_20px_rgba(16,185,129,0.3)]">
           <ShieldCheck className="w-8 h-8" />
         </div>
-        <div className="flex items-center gap-2 mb-1 flex-wrap justify-center">
-          <h3 className="text-base font-bold text-slate-100">No Connected Apps Found</h3>
-          <span className="badge badge-safe text-[10px]">Scan Completed</span>
+        <div className="flex items-center gap-2 mb-2 flex-wrap justify-center">
+          <h3 className="text-lg font-bold text-white">Fortified: No Active Approvals Found</h3>
+          <span className="badge badge-safe text-[10px]">100% Safe</span>
         </div>
-        <p className="mt-2 text-xs text-slate-400 max-w-md mx-auto leading-relaxed">
-          Security scan finished. No apps currently have permission to spend your tokens. Your wallet is safe!
+        <p className="text-xs text-slate-400 max-w-md mx-auto leading-relaxed">
+          The on-chain security audit completed successfully. No applications or smart contracts currently hold token spending permissions for this wallet.
         </p>
         {auditTxHash && (
-          <div className="mt-4 pt-3 border-t border-slate-800">
+          <div className="mt-5 pt-4 border-t border-slate-800/80">
             <a
-              href={`https://scan.bohr.life/tx/${auditTxHash}`}
+              href={`https://scan.botchain.ai/tx/${auditTxHash}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-emerald-400 hover:text-emerald-300 flex items-center gap-1 font-semibold"
+              className="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 font-semibold transition"
             >
-              <span>View Scan Receipt on Bohr Scan</span>
+              <span>View On-Chain Scan Receipt on BOT Scan</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </div>
@@ -116,14 +120,14 @@ export const ApprovalTable: React.FC<ApprovalTableProps> = ({
     );
   }
 
+  // 3. Render Active Approvals Table
   return (
-    <div className="glass-panel overflow-hidden rounded-2xl border border-slate-800 my-4 shadow-xl">
-      {/* Desktop View Table */}
+    <div className="glass-panel overflow-hidden rounded-2xl border border-slate-800/90 my-3 shadow-xl">
       <div className="overflow-x-auto">
-        <table className="w-full text-left border-collapse min-w-[880px]">
+        <table className="w-full text-left border-collapse min-w-[900px]">
           <thead>
-            <tr className="border-b border-slate-800 bg-slate-900/80 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-              <th className="py-4 pl-4 pr-2 w-10">
+            <tr className="border-b border-slate-800 bg-slate-900/90 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+              <th className="py-4 pl-5 pr-2 w-12">
                 <input
                   type="checkbox"
                   checked={isAllSelected}
@@ -132,11 +136,11 @@ export const ApprovalTable: React.FC<ApprovalTableProps> = ({
                   title="Select all"
                 />
               </th>
-              <th className="py-4 px-4 whitespace-nowrap">Token & Balance</th>
-              <th className="py-4 px-4 whitespace-nowrap">Connected App</th>
-              <th className="py-4 px-4 whitespace-nowrap">Access Limit</th>
-              <th className="py-4 px-4 whitespace-nowrap">Risk Level</th>
-              <th className="py-4 pr-4 pl-4 text-right whitespace-nowrap">Actions</th>
+              <th className="py-4 px-4 whitespace-nowrap">Asset / Token</th>
+              <th className="py-4 px-4 whitespace-nowrap">Approved Spender</th>
+              <th className="py-4 px-4 whitespace-nowrap">Allowance Limit</th>
+              <th className="py-4 px-4 whitespace-nowrap">Risk Classification</th>
+              <th className="py-4 pr-5 pl-4 text-right whitespace-nowrap">Safety Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-800/60 text-xs">
@@ -154,172 +158,174 @@ export const ApprovalTable: React.FC<ApprovalTableProps> = ({
                       : ''
                   }`}
                 >
-                  {/* Checkbox */}
-                  <td className="py-4 pl-4 pr-2">
+                  {/* Select Checkbox */}
+                  <td className="py-4 pl-5 pr-2">
                     <input
                       type="checkbox"
                       checked={isSelected}
                       onChange={() => onToggleSelect(record.id)}
-                      className="rounded border-slate-700 bg-slate-800 text-emerald-500 focus:ring-0 cursor-pointer"
+                      className="rounded border-slate-700 bg-slate-800 text-emerald-500 focus:ring-0 focus:ring-offset-0 cursor-pointer"
                     />
                   </td>
 
-                  {/* Token & Balance */}
+                  {/* Token Info */}
                   <td className="py-4 px-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center font-bold text-xs text-white flex-shrink-0">
-                        {record.token.logoUrl ? (
-                          <img
-                            src={record.token.logoUrl}
-                            alt={record.token.symbol}
-                            className="w-5 h-5 rounded-full"
-                            onError={(e) => {
-                              (e.target as HTMLElement).style.display = 'none';
-                            }}
-                          />
-                        ) : (
-                          record.token.symbol.slice(0, 3)
-                        )}
+                      <div className="w-8 h-8 rounded-full bg-slate-800 border border-slate-700/80 flex items-center justify-center font-bold text-xs text-emerald-400 flex-shrink-0 shadow-sm">
+                        {record.token.symbol.slice(0, 3)}
                       </div>
                       <div>
-                        <div className="font-bold text-slate-100 flex items-center gap-1.5">
+                        <div className="font-bold text-sm text-white flex items-center gap-1.5">
                           <span>{record.token.symbol}</span>
-                          <span className="text-[10px] text-slate-500 font-normal">
+                          <span className="text-[11px] font-normal text-slate-400">
                             ({record.token.name})
                           </span>
                         </div>
-                        <div className="text-[11px] text-slate-400 mt-0.5">
-                          Balance:{' '}
-                          <span className="text-slate-300 font-semibold mono">
-                            {record.userBalanceFormatted} {record.token.symbol}
-                          </span>
+                        <div className="flex items-center gap-1.5 text-[11px] text-slate-400 mt-0.5">
+                          <span className="mono">{record.token.address.slice(0, 6)}...{record.token.address.slice(-4)}</span>
+                          <button
+                            onClick={() => handleCopy(record.token.address)}
+                            className="hover:text-white"
+                            title="Copy token address"
+                          >
+                            {copiedAddress === record.token.address ? (
+                              <Check className="w-3 h-3 text-emerald-400" />
+                            ) : (
+                              <Copy className="w-3 h-3" />
+                            )}
+                          </button>
+                          <a
+                            href={`https://scan.botchain.ai/token/${record.token.address}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-emerald-400"
+                            title="View token on BOT Scan"
+                          >
+                            <ExternalLink className="w-3 h-3" />
+                          </a>
                         </div>
                       </div>
                     </div>
                   </td>
 
-                  {/* Spender & Protocol */}
+                  {/* Spender Info */}
                   <td className="py-4 px-4">
                     <div>
-                      <div className="flex items-center gap-2 flex-wrap">
+                      <div className="flex items-center gap-1.5">
                         <span className="font-semibold text-slate-200">
                           {record.spender.name}
                         </span>
                         {record.spender.isVerified ? (
-                          <span className="badge badge-safe text-[9px] py-0.5 px-2">
-                            Verified App
+                          <span className="badge badge-safe text-[9px] py-0.5 px-1.5">
+                            Verified
                           </span>
                         ) : (
-                          <span className="badge badge-critical text-[9px] py-0.5 px-2">
-                            Unknown App
+                          <span className="badge badge-critical text-[9px] py-0.5 px-1.5">
+                            Unverified
                           </span>
                         )}
                       </div>
-
-                      <div className="flex items-center gap-2 mt-1 text-[11px] text-slate-400 mono">
-                        <span>
-                          {record.spender.address.slice(0, 8)}...
-                          {record.spender.address.slice(-6)}
-                        </span>
+                      <div className="flex items-center gap-1.5 text-[11px] text-slate-400 mt-0.5">
+                        <span className="mono">{record.spender.address.slice(0, 6)}...{record.spender.address.slice(-4)}</span>
                         <button
                           onClick={() => handleCopy(record.spender.address)}
-                          title="Copy app address"
-                          className="hover:text-white transition"
+                          className="hover:text-white"
+                          title="Copy spender address"
                         >
                           {copiedAddress === record.spender.address ? (
                             <Check className="w-3 h-3 text-emerald-400" />
                           ) : (
-                            <Copy className="w-3 h-3 text-slate-500 hover:text-slate-300" />
+                            <Copy className="w-3 h-3" />
                           )}
                         </button>
                         <a
-                          href={`https://scan.bohr.life/address/${record.spender.address}`}
+                          href={`https://scan.botchain.ai/address/${record.spender.address}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          title="View app on Bohr Scan"
-                          className="hover:text-emerald-400 transition"
+                          className="hover:text-emerald-400"
+                          title="View contract on BOT Scan"
                         >
-                          <ExternalLink className="w-3 h-3 text-slate-500 hover:text-emerald-400" />
+                          <ExternalLink className="w-3 h-3" />
                         </a>
                       </div>
                     </div>
                   </td>
 
-                  {/* Allowance Amount */}
+                  {/* Allowance Limit */}
                   <td className="py-4 px-4">
                     {record.isUnlimited ? (
-                      <div className="inline-flex flex-col">
-                        <span className="badge badge-critical text-[10px] font-extrabold tracking-wide px-2.5 py-1 flex items-center gap-1 shadow-[0_0_12px_rgba(239,68,68,0.2)]">
-                          <AlertOctagon className="w-3.5 h-3.5" />
-                          UNLIMITED (∞)
+                      <div>
+                        <span className="badge badge-critical text-[10px] py-1 px-2.5 font-bold">
+                          Unlimited (∞)
                         </span>
-                        <span className="text-[10px] text-rose-400/90 mt-1">
-                          Can spend all your tokens
-                        </span>
+                        <div className="text-[10px] text-rose-400/80 mt-1 font-medium">
+                          Spender can withdraw any amount
+                        </div>
                       </div>
                     ) : (
-                      <div className="mono">
-                        <span className="text-slate-100 font-bold">
-                          {record.allowanceFormatted}
-                        </span>{' '}
-                        <span className="text-slate-400 text-[10px]">
-                          {record.token.symbol}
+                      <div>
+                        <span className="mono font-bold text-slate-200">
+                          {record.allowanceFormatted} {record.token.symbol}
                         </span>
+                        <div className="text-[10px] text-emerald-400 mt-0.5">
+                          Capped limit
+                        </div>
                       </div>
                     )}
                   </td>
 
-                  {/* Risk Assessment */}
-                  <td className="py-4 px-4 max-w-xs">
-                    <div>
-                      {record.riskLevel === 'CRITICAL' && (
-                        <span className="badge badge-critical">Critical Risk</span>
-                      )}
-                      {record.riskLevel === 'ELEVATED' && (
-                        <span className="badge badge-elevated">High Risk</span>
-                      )}
-                      {record.riskLevel === 'MEDIUM' && (
-                        <span className="badge badge-medium">Medium Risk</span>
-                      )}
-                      {record.riskLevel === 'SAFE' && (
-                        <span className="badge badge-safe">Safe</span>
-                      )}
-
-                      <div className="mt-1.5 space-y-1">
-                        {record.riskReasons.map((reason, idx) => (
-                          <div
-                            key={idx}
-                            className="text-[10px] text-slate-400 flex items-start gap-1 leading-tight"
-                          >
-                            <span className="text-slate-500">•</span>
-                            <span>{reason}</span>
-                          </div>
-                        ))}
+                  {/* Risk Level */}
+                  <td className="py-4 px-4">
+                    <div className="space-y-1">
+                      <div>
+                        {record.riskLevel === 'CRITICAL' && (
+                          <span className="badge badge-critical text-[10px]">
+                            Critical Risk
+                          </span>
+                        )}
+                        {record.riskLevel === 'ELEVATED' && (
+                          <span className="badge badge-elevated text-[10px]">
+                            Elevated
+                          </span>
+                        )}
+                        {record.riskLevel === 'MEDIUM' && (
+                          <span className="badge badge-medium text-[10px]">
+                            Medium
+                          </span>
+                        )}
+                        {record.riskLevel === 'SAFE' && (
+                          <span className="badge badge-safe text-[10px]">
+                            Safe
+                          </span>
+                        )}
                       </div>
+                      {record.riskReasons.length > 0 && (
+                        <div className="text-[10px] text-slate-400 max-w-xs leading-tight">
+                          {record.riskReasons[0]}
+                        </div>
+                      )}
                     </div>
                   </td>
 
-                  {/* Actions: Revoke & Edit */}
-                  <td className="py-4 pr-4 pl-4 text-right whitespace-nowrap">
+                  {/* Actions */}
+                  <td className="py-4 pr-5 pl-4 text-right">
                     <div className="flex items-center justify-end gap-2">
                       <button
-                        onClick={() => onRevoke(record)}
-                        id={`btn-revoke-${record.id}`}
-                        className="btn btn-danger text-xs py-1.5 px-3 flex items-center gap-1 shadow-[0_0_12px_rgba(239,68,68,0.25)]"
-                        title="Remove this app's access to your tokens"
+                        onClick={() => onEditCap(record)}
+                        className="btn btn-secondary text-xs py-1.5 px-3 flex items-center gap-1.5"
+                        title="Cap or adjust allowance"
                       >
-                        <Trash2 className="w-3.5 h-3.5" />
-                        <span>Disconnect</span>
+                        <Edit3 className="w-3.5 h-3.5 text-slate-400" />
+                        <span>Adjust</span>
                       </button>
 
                       <button
-                        onClick={() => onEditCap(record)}
-                        id={`btn-edit-${record.id}`}
-                        className="btn btn-secondary text-xs py-1.5 px-2.5 flex items-center gap-1"
-                        title="Set a spending limit for this app"
+                        onClick={() => onRevoke(record)}
+                        className="btn btn-danger text-xs py-1.5 px-3.5 flex items-center gap-1.5 shadow-sm"
+                        title="Revoke permission completely"
                       >
-                        <Edit3 className="w-3.5 h-3.5 text-slate-300" />
-                        <span>Set Limit</span>
+                        <Trash2 className="w-3.5 h-3.5" />
+                        <span>Revoke</span>
                       </button>
                     </div>
                   </td>

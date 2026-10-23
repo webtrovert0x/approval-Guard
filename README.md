@@ -4,15 +4,15 @@
 
 ![BOT Approval Guard Logo](/public/logo.png)
 
-[![Network](https://img.shields.io/badge/Network-BOT%20Chain%20(968)-emerald)](https://scan.bohr.life/)
-[![Smart Contract](https://img.shields.io/badge/Contract-0xb8a58c...ff35-cyan)](https://scan.bohr.life/address/0xb8a58c3bbfeb9227ac2e6e3c0791a93b9970ff35)
+[![Network](https://img.shields.io/badge/Network-BOT%20Chain%20(677)-emerald)](https://scan.botchain.ai/)
+[![Smart Contract](https://img.shields.io/badge/Contract-0x1308bc...cbf5-cyan)](https://scan.botchain.ai/address/0x1308bcc49fd9e4ef533c0915e6cb3a0a0d16cbf5)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ---
 
 ## 📌 Overview
 
-**BOT Approval Guard** is a non-custodial wallet protection dashboard built natively for **BOT Chain (Chain ID: 968)**. It monitors token permissions, identifies risky apps with unlimited access, and enables users to disconnect apps or set safe spending limits directly on-chain.
+**BOT Approval Guard** is a non-custodial wallet protection dashboard built natively for **BOT Chain Mainnet (Chain ID: 677)**. It monitors token permissions, identifies risky apps with unlimited access, and enables users to disconnect apps or set safe spending limits directly on-chain.
 
 ---
 
@@ -31,11 +31,12 @@
 ## 🌐 Smart Contract Details
 
 - **Contract Name**: `ApprovalGuard.sol`
-- **Deployed Address**: [`0xb8a58c3bbfeb9227ac2e6e3c0791a93b9970ff35`](https://scan.bohr.life/address/0xb8a58c3bbfeb9227ac2e6e3c0791a93b9970ff35)
-- **Network**: BOT Chain Testnet
-- **Chain ID**: `968`
-- **RPC Endpoint**: `https://rpc.bohr.life`
-- **Block Explorer**: [https://scan.bohr.life/](https://scan.bohr.life/)
+- **Deployed Address**: [`0x1308bcc49fd9e4ef533c0915e6cb3a0a0d16cbf5`](https://scan.botchain.ai/address/0x1308bcc49fd9e4ef533c0915e6cb3a0a0d16cbf5)
+- **Network**: BOT Chain Mainnet
+- **Chain ID**: `677`
+- **RPC Endpoint**: `https://rpc.botchain.ai`
+- **Official Website**: [https://botchain.ai](https://botchain.ai)
+- **Block Explorer**: [https://scan.botchain.ai/](https://scan.botchain.ai/)
 - **Native Currency**: BOT
 
 ---
